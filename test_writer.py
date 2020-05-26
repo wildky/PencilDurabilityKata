@@ -20,34 +20,30 @@ class TestPaper(unittest.TestCase):
 
 class TestPencil(unittest.TestCase):
 
+    def setUp(self):
+        self.initial_point_durability = 100
+        self.pencil = Pencil(self.initial_point_durability)
+
     def test_when_pencil_is_created_it_has_an_initial_point_durability(self):
-        initial_point_durability = 100
-        pencil = Pencil(initial_point_durability)
-        self.assertEqual(initial_point_durability, pencil.point_durability)
+        self.assertEqual(self.initial_point_durability, self.pencil.point_durability)
     
     def test_writing_lower_case_characters_reduces_point_durability_by_one(self):
-        initial_point_durability = 100
-        pencil = Pencil(initial_point_durability)
         new_text = "bird"
-        pencil.write(new_text)
-        expected_point_durability = initial_point_durability - 4*1
-        self.assertEqual(pencil.point_durability, expected_point_durability)
+        self.pencil.write(new_text)
+        expected_point_durability = self.initial_point_durability - 4*1
+        self.assertEqual(self.pencil.point_durability, expected_point_durability)
    
     def test_writing_upper_case_characters_reduces_point_durability_by_two(self):
-        initial_point_durability = 100
-        pencil = Pencil(initial_point_durability)
         new_text = "BIRD"
-        pencil.write(new_text)
-        expected_point_durability = initial_point_durability - 4*2
-        self.assertEqual(pencil.point_durability, expected_point_durability)
+        self.pencil.write(new_text)
+        expected_point_durability = self.initial_point_durability - 4*2
+        self.assertEqual(self.pencil.point_durability, expected_point_durability)
 
     def test_writing_upper_and_lower_case_characters(self):
-        initial_point_durability = 100
-        pencil = Pencil(initial_point_durability)
         new_text = "Birds are BEAUTIFUL"
-        pencil.write(new_text)
-        expected_point_durability = initial_point_durability - 10*2 - 7*1
-        self.assertEqual(pencil.point_durability, expected_point_durability)
+        self.pencil.write(new_text)
+        expected_point_durability = self.initial_point_durability - 10*2 - 7*1
+        self.assertEqual(self.pencil.point_durability, expected_point_durability)
 
 if __name__ == "__main__":
     unittest.main()
