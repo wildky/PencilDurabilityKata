@@ -30,7 +30,7 @@ class TestPencil(unittest.TestCase):
         pencil = Pencil(initial_point_durability)
         new_text = "bird"
         pencil.write(new_text)
-        expected_point_durability = initial_point_durability - len(new_text)
+        expected_point_durability = initial_point_durability - 4*1
         self.assertEqual(pencil.point_durability, expected_point_durability)
    
     def test_writing_upper_case_characters_reduces_point_durability_by_two(self):
@@ -38,7 +38,15 @@ class TestPencil(unittest.TestCase):
         pencil = Pencil(initial_point_durability)
         new_text = "BIRD"
         pencil.write(new_text)
-        expected_point_durability = initial_point_durability - len(new_text)*2
+        expected_point_durability = initial_point_durability - 4*2
+        self.assertEqual(pencil.point_durability, expected_point_durability)
+
+    def test_writing_upper_and_lower_case_characters(self):
+        initial_point_durability = 100
+        pencil = Pencil(initial_point_durability)
+        new_text = "Birds are BEAUTIFUL"
+        pencil.write(new_text)
+        expected_point_durability = initial_point_durability - 10*2 - 7*1
         self.assertEqual(pencil.point_durability, expected_point_durability)
 
 if __name__ == "__main__":
