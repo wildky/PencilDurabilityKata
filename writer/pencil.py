@@ -1,6 +1,10 @@
 class Pencil:
-    def __init__(self, point_durability):
-        self.point_durability = point_durability
+    def __init__(self, initial_point_durability):
+        self.initial_point_durability = initial_point_durability
+        self.point_durability = initial_point_durability
+    
+    def sharpen(self):
+        self.point_durability = self.initial_point_durability
 
     def write(self, new_text, paper):
         for character in new_text:

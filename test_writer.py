@@ -74,6 +74,12 @@ class TestPencil(unittest.TestCase):
         self.pencil.write("ird", self.paper)
         self.assertTrue(self.paper.text.endswith("bi  "))
 
+    def test_when_sharpen_a_pencil_durability_returns_to_initial_value(self):
+        self.pencil.write("durability is reduced", self.paper)
+        self.assertNotEqual(self.pencil.point_durability, self.initial_point_durability)
+        self.pencil.sharpen()
+        self.assertEqual(self.pencil.point_durability, self.initial_point_durability)
+
 if __name__ == "__main__":
     unittest.main()
         
