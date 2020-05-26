@@ -2,14 +2,15 @@ class Pencil:
     def __init__(self, point_durability):
         self.point_durability = point_durability
 
-    def write(self, new_text):
+    def write(self, new_text, paper):
         for character in new_text:
-            self._write_character(character)
+            self._write_character(character, paper)
 
-    def _write_character(self, character):
+    def _write_character(self, character, paper):
         durability_reduction = self._calculate_durability_reduction(character)
         if self.point_durability - durability_reduction >= 0:
-           self.point_durability -= durability_reduction
+            paper.write(character)
+            self.point_durability -= durability_reduction
         else:
             pass
 
