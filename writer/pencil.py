@@ -7,7 +7,16 @@ class Pencil:
             self._write_character(character)
 
     def _write_character(self, character):
+        durability_reduction = self._calculate_durability_reduction(character)
+        if self.point_durability - durability_reduction >= 0:
+           self.point_durability -= durability_reduction
+        else:
+            pass
+
+    def _calculate_durability_reduction(self, character):
         if character.isupper():
-            self.point_durability -= 2
+            return 2
         elif character.islower():
-            self.point_durability -= 1        
+            return 1 
+        else:
+            return 0

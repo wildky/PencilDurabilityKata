@@ -46,6 +46,12 @@ class TestPencil(unittest.TestCase):
         expected_point_durability = self.initial_point_durability - 10*2 - 7*1
         self.assertEqual(self.pencil.point_durability, expected_point_durability)
 
+    def test_write_upper_case_character_with_pencil_with_one_durability_does_nothing(self):
+        new_text = "b"*99
+        self.pencil.write(new_text)
+        self.pencil.write("B")
+        self.assertEqual(self.pencil.point_durability, 1)
+
 if __name__ == "__main__":
     unittest.main()
         
