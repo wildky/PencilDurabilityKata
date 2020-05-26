@@ -46,6 +46,11 @@ class TestPencil(unittest.TestCase):
         self.pencil.write(new_text, self.paper)
         expected_point_durability = self.initial_point_durability - 10*2 - 7*1
         self.assertEqual(self.pencil.point_durability, expected_point_durability)
+    
+    def test_writing_spaces_has_no_effect_on_pencil_durability(self):
+        new_text = " "*1000
+        self.pencil.write(new_text, self.paper)
+        self.assertEqual(self.pencil.point_durability, self.initial_point_durability)
 
     def test_write_upper_case_character_with_pencil_with_one_durability_does_nothing(self):
         new_text = "b"*99
