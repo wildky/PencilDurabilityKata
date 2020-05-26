@@ -3,4 +3,4 @@ class Paper:
         self.text = ""
 
     def write(self, new_text):
-        self.text = "I love to write"
+        self.text += new_text
