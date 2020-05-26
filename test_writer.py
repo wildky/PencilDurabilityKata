@@ -14,7 +14,7 @@ class TestPaper(unittest.TestCase):
         paper = Paper()
         first_text = "I love to write"
         paper.write(first_text)
-        second_text = "but sometimes it makes my hand hurt"
+        second_text = " but sometimes it makes my hand hurt"
         paper.write(second_text)
         self.assertEqual(paper.text, first_text + second_text)
 
