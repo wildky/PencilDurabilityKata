@@ -86,6 +86,17 @@ class TestPencil(unittest.TestCase):
         self.pencil.sharpen()
         self.assertEqual(initial_length - 1, self.pencil.length)
 
+    def test_when_pencil_length_is_zero_durability_is_not_restored(self):
+        for x in range(10):
+            self.pencil.sharpen()
+            x += 1
+        self.pencil.write("shreddin that pencil", self.paper)
+        expected_durability = self.pencil.point_durability
+        self.pencil.sharpen()
+        self.assertEqual(self.pencil.point_durability, expected_durability)
+
+        
+
 
 if __name__ == "__main__":
     unittest.main()

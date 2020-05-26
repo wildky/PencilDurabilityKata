@@ -6,8 +6,9 @@ class Pencil:
         self.length = initial_length
     
     def sharpen(self):
-        self.point_durability = self.initial_point_durability
-        self.length -= 1
+        if self.length > 0:
+            self.point_durability = self.initial_point_durability
+            self.length -= 1
 
     def write(self, new_text, paper):
         for character in new_text:
