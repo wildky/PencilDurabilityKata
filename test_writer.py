@@ -52,6 +52,11 @@ class TestPencil(unittest.TestCase):
         self.pencil.write("B")
         self.assertEqual(self.pencil.point_durability, 1)
 
+    def test_durability_cannot_go_below_0(self):
+        new_text = "b"*120
+        self.pencil.write(new_text)
+        self.assertEqual(self.pencil.point_durability, 0)
+
 if __name__ == "__main__":
     unittest.main()
         
