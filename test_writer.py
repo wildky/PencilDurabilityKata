@@ -63,6 +63,12 @@ class TestPencil(unittest.TestCase):
         self.pencil.write(new_text, self.paper)
         self.paper.text = new_text
 
+    def test_writing_with_pencil_with_no_durability_writes_space_on_paper(self):
+        new_text = "b"*99
+        self.pencil.write(new_text, self.paper)
+        self.pencil.write("ird", self.paper)
+        self.assertTrue(self.paper.text.endswith("bi  "))
+
 if __name__ == "__main__":
     unittest.main()
         

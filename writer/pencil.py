@@ -12,7 +12,7 @@ class Pencil:
             paper.write(character)
             self.point_durability -= durability_reduction
         else:
-            pass
+            paper.write(" ")
 
     def _calculate_durability_reduction(self, character):
         if character.isupper():
