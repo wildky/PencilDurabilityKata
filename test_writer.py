@@ -23,7 +23,8 @@ class TestPencil(unittest.TestCase):
 
     def setUp(self):
         self.initial_point_durability = 100
-        self.pencil = Pencil(self.initial_point_durability)
+        self.initial_length = 10
+        self.pencil = Pencil(self.initial_point_durability, self.initial_length)
         self.paper = Paper()
 
     def test_when_pencil_is_created_it_has_an_initial_point_durability(self):
@@ -79,6 +80,12 @@ class TestPencil(unittest.TestCase):
         self.assertNotEqual(self.pencil.point_durability, self.initial_point_durability)
         self.pencil.sharpen()
         self.assertEqual(self.pencil.point_durability, self.initial_point_durability)
+    
+    def test_when_sharpened_pencil_length_decreases_by_one(self):
+        initial_length = self.pencil.length
+        self.pencil.sharpen()
+        self.assertEqual(initial_length - 1, self.pencil.length)
+
 
 if __name__ == "__main__":
     unittest.main()
