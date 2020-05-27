@@ -24,8 +24,10 @@ class TestPencil(unittest.TestCase):
     def setUp(self):
         self.initial_point_durability = 100
         self.initial_length = 10
+        self.initial_eraser_durability = 50
         self.pencil = Pencil(self.initial_point_durability, 
-                             self.initial_length)
+                             self.initial_length, 
+                             self.initial_eraser_durability)
         self.paper = Paper()
 
     def test_when_pencil_is_created_it_has_an_initial_point_durability(self):
@@ -121,6 +123,13 @@ class TestPencil(unittest.TestCase):
         self.pencil.write(new_text, self.paper)
         self.pencil.erase("but it is horribly cold so never mind", self.paper)
         self.assertEqual(self.paper.text, new_text)
+
+    def test_when_erase_a_non_whitespace_character_durability_decreases(self):
+        self.pencil.write("Erase me, my sweet erasable you", self.paper)
+        erased_word = "erasable"
+        self.pencil.erase(erased_word, self.paper)
+        expected_eraser_durability = self.initial_eraser_durability - len(erased_word)
+        self.assertEqual(self.pencil.eraser_durability, expected_eraser_durability)
 
 if __name__ == "__main__":
     unittest.main()

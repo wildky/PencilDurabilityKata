@@ -1,9 +1,11 @@
 class Pencil:
-    def __init__(self, initial_point_durability, initial_length):
+
+    def __init__(self, initial_point_durability, initial_length, eraser_durability):
         self.initial_point_durability = initial_point_durability
         self.point_durability = initial_point_durability
         self.initial_length = initial_length
         self.length = initial_length
+        self.eraser_durability = eraser_durability
     
     def sharpen(self):
         if self.length > 0:
@@ -14,10 +16,18 @@ class Pencil:
         erase_length = len(erased_text)
         erase_index = paper.text.rfind(erased_text)
         if erase_index != -1:
-            paper.text = (paper.text[:erase_index] 
-                          + " "*erase_length 
-                          + paper.text[erase_index+erase_length:])
+            character_index = erase_index + erase_length - 1
+            for character in erased_text:
+                if self.eraser_durability == 0:
+                    break
+                self._erase_character(character_index, paper)
+                character_index -= 1
 
+    def _erase_character(self, character_index, paper):
+            paper.text = (paper.text[:character_index] 
+                          + " "
+                          + paper.text[character_index + 1:])
+            self.eraser_durability -= 1
 
     def write(self, new_text, paper):
         for character in new_text:
