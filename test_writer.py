@@ -140,6 +140,14 @@ class TestPencil(unittest.TestCase):
         expected_eraser_durability = self.initial_eraser_durability - 10
         self.assertEqual(self.pencil.eraser_durability, 
                          expected_eraser_durability)
+    
+    def test_when_erase_text_that_does_not_exist_paper_is_uneffected(self):
+        new_text = "Erase me, my sweet erasable you"
+        self.pencil.write(new_text, self.paper)
+        erased_text = "Chet baker is the best"
+        self.pencil.erase(erased_text, self.paper)
+        self.assertEqual(self.paper.text, 
+                         new_text)
 
 if __name__ == "__main__":
     unittest.main()
