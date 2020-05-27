@@ -124,6 +124,13 @@ class TestPencil(unittest.TestCase):
         self.pencil.erase("but it is horribly cold so never mind", self.paper)
         self.assertEqual(self.paper.text, new_text)
 
+    def test_when_erase_and_no_occurence_exists_pencil_durbaility_is_uneffected(self):
+        new_text = "lovely day for a bike ride today"
+        self.pencil.write(new_text, self.paper)
+        self.pencil.erase("but it is horribly cold so never mind", self.paper)
+        self.assertEqual(self.pencil.eraser_durability, 
+                         self.initial_eraser_durability)  
+
     def test_when_erase_a_non_whitespace_character_durability_decreases(self):
         self.pencil.write("Erase me, my sweet erasable you", self.paper)
         erased_text = "erasable"
