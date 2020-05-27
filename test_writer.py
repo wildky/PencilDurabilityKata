@@ -126,9 +126,16 @@ class TestPencil(unittest.TestCase):
 
     def test_when_erase_a_non_whitespace_character_durability_decreases(self):
         self.pencil.write("Erase me, my sweet erasable you", self.paper)
-        erased_word = "erasable"
-        self.pencil.erase(erased_word, self.paper)
-        expected_eraser_durability = self.initial_eraser_durability - len(erased_word)
+        erased_text = "erasable"
+        self.pencil.erase(erased_text, self.paper)
+        expected_eraser_durability = self.initial_eraser_durability - len(erased_text)
+        self.assertEqual(self.pencil.eraser_durability, expected_eraser_durability)
+
+    def test_when_erase_whitespace_character_durability_is_uneffected(self):
+        self.pencil.write("Erase me, my sweet erasable you", self.paper)
+        erased_text = "Erase me, my "
+        self.pencil.erase(erased_text, self.paper)
+        expected_eraser_durability = self.initial_eraser_durability - 10
         self.assertEqual(self.pencil.eraser_durability, expected_eraser_durability)
 
 if __name__ == "__main__":

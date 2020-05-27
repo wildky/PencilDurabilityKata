@@ -20,14 +20,18 @@ class Pencil:
             for character in erased_text:
                 if self.eraser_durability == 0:
                     break
-                self._erase_character(character_index, paper)
+                self._erase_character(character, character_index, paper)
                 character_index -= 1
 
-    def _erase_character(self, character_index, paper):
-            paper.text = (paper.text[:character_index] 
-                          + " "
-                          + paper.text[character_index + 1:])
+    def _erase_character(self, character, index, paper):
+        if self._erasable(character):
+            paper.text = (paper.text[:index] 
+                            + " "
+                            + paper.text[index + 1:])
             self.eraser_durability -= 1
+    
+    def _erasable(self, character):
+        return False if character == ' ' else True
 
     def write(self, new_text, paper):
         for character in new_text:
