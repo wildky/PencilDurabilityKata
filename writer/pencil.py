@@ -1,5 +1,11 @@
 class Pencil:
 
+    POINT_DEGADATION_VALUE_UPPER = 2
+    POINT_DEGADATION_VALUE_LOWER = 1
+    LENGTH_DEGRADATION_VALUE = 1
+    ERASER_DEGRADATION_VALUE = 1
+    NON_ERASABLE_CHARACTERS = [" "]
+
     def __init__(self, initial_point_durability, initial_length, eraser_durability):
         self.initial_point_durability = initial_point_durability
         self.point_durability = initial_point_durability
@@ -28,10 +34,10 @@ class Pencil:
             paper.text = (paper.text[:index] 
                           + " "
                           + paper.text[index + 1:])
-            self.eraser_durability -= 1
+            self.eraser_durability -= self.ERASER_DEGRADATION_VALUE
     
     def _erasable(self, character):
-        return False if character == ' ' else True
+        return False if character in self.NON_ERASABLE_CHARACTERS else True
 
     def write(self, new_text, paper):
         for character in new_text:
@@ -47,8 +53,8 @@ class Pencil:
 
     def _calculate_durability_reduction(self, character):
         if character.isupper():
-            return 2
+            return self.POINT_DEGADATION_VALUE_UPPER
         elif character.islower():
-            return 1 
+            return self.POINT_DEGADATION_VALUE_LOWER
         else:
             return 0
