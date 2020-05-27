@@ -6,11 +6,10 @@ class Pencil:
     ERASER_DEGRADATION_VALUE = 1
     NON_ERASABLE_CHARACTERS = [" "]
 
-    def __init__(self, initial_point_durability, initial_length, eraser_durability):
+    def __init__(self, initial_point_durability, length, eraser_durability):
         self.initial_point_durability = initial_point_durability
         self.point_durability = initial_point_durability
-        self.initial_length = initial_length
-        self.length = initial_length
+        self.length = length
         self.eraser_durability = eraser_durability
     
     def sharpen(self):
