@@ -13,9 +13,10 @@ class Pencil:
     def erase(self, erased_text, paper):
         erase_length = len(erased_text)
         erase_index = paper.text.rfind(erased_text)
-        paper.text = (paper.text[:erase_index] 
-                      + " "*erase_length 
-                      + paper.text[erase_index+erase_length:])
+        if erase_index != -1:
+            paper.text = (paper.text[:erase_index] 
+                        + " "*erase_length 
+                        + paper.text[erase_index+erase_length:])
 
 
     def write(self, new_text, paper):

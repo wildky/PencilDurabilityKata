@@ -107,7 +107,13 @@ class TestPencil(unittest.TestCase):
         self.pencil.erase("day", self.paper)
         expected_text = "lovely     for a bike ride to   "
         self.assertEqual(self.paper.text, expected_text)
-        
+
+    def test_when_erase_and_no_occurence_exists_nothing_happens(self):
+        new_text = "lovely day for a bike ride today"
+        self.pencil.write(new_text, self.paper)
+        self.pencil.erase("but it is horribly cold so never mind", self.paper)
+        self.assertEqual(self.paper.text, new_text)
+
 if __name__ == "__main__":
     unittest.main()
         
