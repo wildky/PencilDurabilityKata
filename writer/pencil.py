@@ -205,3 +205,11 @@ class Pencil:
             return self.POINT_DEGADATION_VALUE_LOWER
         else:
             return 0
+    
+    def edit(self, new_text, index, paper):
+        for character in new_text:
+            paper.text = (paper.text[:index] 
+                          + character
+                          + paper.text[index + 1:])
+            self.eraser_durability -= self.ERASER_DEGRADATION_VALUE
+            index += 1
