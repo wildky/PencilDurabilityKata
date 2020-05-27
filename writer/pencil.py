@@ -6,15 +6,15 @@ class Pencil:
     ERASER_DEGRADATION_VALUE = 1
     NON_ERASABLE_CHARACTERS = [" "]
 
-    def __init__(self, initial_point_durability, length, eraser_durability):
-        self.initial_point_durability = initial_point_durability
-        self.point_durability = initial_point_durability
+    def __init__(self, max_point_durability, length, eraser_durability):
+        self.max_point_durability = max_point_durability
+        self.point_durability = max_point_durability
         self.length = length
         self.eraser_durability = eraser_durability
     
     def sharpen(self):
         if self.length > 0:
-            self.point_durability = self.initial_point_durability
+            self.point_durability = self.max_point_durability
             self.length -= 1
 
     def erase(self, erased_text, paper):

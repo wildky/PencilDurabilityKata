@@ -22,36 +22,36 @@ class TestPaper(unittest.TestCase):
 class TestPencil(unittest.TestCase):
 
     def setUp(self):
-        self.initial_point_durability = 100
+        self.max_point_durability = 100
         self.initial_length = 10
         self.initial_eraser_durability = 50
-        self.pencil = Pencil(self.initial_point_durability, 
+        self.pencil = Pencil(self.max_point_durability, 
                              self.initial_length, 
                              self.initial_eraser_durability)
         self.paper = Paper()
 
-    def test_when_pencil_is_created_it_has_an_initial_point_durability(self):
-        self.assertEqual(self.initial_point_durability, 
+    def test_when_pencil_is_created_it_has_an_max_point_durability(self):
+        self.assertEqual(self.max_point_durability, 
                          self.pencil.point_durability)
     
     def test_writing_lower_case_characters_reduces_point_durability_by_one(self):
         new_text = "bird"
         self.pencil.write(new_text, self.paper)
-        expected_point_durability = self.initial_point_durability - 4*1
+        expected_point_durability = self.max_point_durability - 4*1
         self.assertEqual(self.pencil.point_durability, 
                          expected_point_durability)
    
     def test_writing_upper_case_characters_reduces_point_durability_by_two(self):
         new_text = "BIRD"
         self.pencil.write(new_text, self.paper)
-        expected_point_durability = self.initial_point_durability - 4*2
+        expected_point_durability = self.max_point_durability - 4*2
         self.assertEqual(self.pencil.point_durability, 
                          expected_point_durability)
 
     def test_writing_upper_and_lower_case_characters(self):
         new_text = "Birds are BEAUTIFUL"
         self.pencil.write(new_text, self.paper)
-        expected_point_durability = self.initial_point_durability - 10*2 - 7*1
+        expected_point_durability = self.max_point_durability - 10*2 - 7*1
         self.assertEqual(self.pencil.point_durability, 
                          expected_point_durability)
     
@@ -59,7 +59,7 @@ class TestPencil(unittest.TestCase):
         new_text = " "*1000
         self.pencil.write(new_text, self.paper)
         self.assertEqual(self.pencil.point_durability, 
-                         self.initial_point_durability)
+                         self.max_point_durability)
 
     def test_write_upper_case_character_with_pencil_with_one_durability_does_nothing(self):
         new_text = "b"*99
@@ -86,10 +86,10 @@ class TestPencil(unittest.TestCase):
     def test_when_sharpen_a_pencil_durability_returns_to_initial_value(self):
         self.pencil.write("durability is reduced", self.paper)
         self.assertNotEqual(self.pencil.point_durability, 
-                            self.initial_point_durability)
+                            self.max_point_durability)
         self.pencil.sharpen()
         self.assertEqual(self.pencil.point_durability, 
-                         self.initial_point_durability)
+                         self.max_point_durability)
     
     def test_when_sharpened_pencil_length_decreases_by_one(self):
         initial_length = self.pencil.length
