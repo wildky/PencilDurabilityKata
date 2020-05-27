@@ -101,6 +101,13 @@ class TestPencil(unittest.TestCase):
         expected_text = "lovely day for a bike ride to   "
         self.assertEqual(self.paper.text, expected_text)
 
+    def test_when_pencil_erases_twice_two_occurence_are_replaced_with_spaces(self):
+        self.pencil.write("lovely day for a bike ride today", self.paper)
+        self.pencil.erase("day", self.paper)
+        self.pencil.erase("day", self.paper)
+        expected_text = "lovely     for a bike ride to   "
+        self.assertEqual(self.paper.text, expected_text)
+        
 if __name__ == "__main__":
     unittest.main()
         
