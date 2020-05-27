@@ -26,8 +26,8 @@ class Pencil:
     def _erase_character(self, character, index, paper):
         if self._erasable(character):
             paper.text = (paper.text[:index] 
-                            + " "
-                            + paper.text[index + 1:])
+                          + " "
+                          + paper.text[index + 1:])
             self.eraser_durability -= 1
     
     def _erasable(self, character):
