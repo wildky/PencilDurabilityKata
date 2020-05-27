@@ -48,7 +48,7 @@ class Pencil:
         and also reduce the pencil `length`. Once a pencil's `length`
         reaches zero, it can no longer be sharpened.
         """
-        
+
         if self.length > 0:
             self.point_durability = self.max_point_durability
             self.length -= 1
@@ -73,15 +73,16 @@ class Pencil:
         -------- 
         """
 
-        erase_length = len(erased_text)
-        erase_index = paper.text.rfind(erased_text)
-        if erase_index != -1:
-            character_index = erase_index + erase_length - 1
+        try:
+            first_character_index = paper.text.rindex(erased_text)
+            final_character_index = first_character_index + len(erased_text) - 1
+            current_character_index = final_character_index
             for character in erased_text:
-                if self.eraser_durability == 0:
-                    break
-                self._erase_character(character, character_index, paper)
-                character_index -= 1
+                if self.eraser_durability > 0:
+                    self._erase_character(character, current_character_index, paper)
+                    current_character_index -= 1
+        except ValueError:
+            pass
 
     def _erase_character(self, character, index, paper):
         """
