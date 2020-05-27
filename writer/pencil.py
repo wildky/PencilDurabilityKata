@@ -10,6 +10,14 @@ class Pencil:
             self.point_durability = self.initial_point_durability
             self.length -= 1
 
+    def erase(self, erased_text, paper):
+        erase_length = len(erased_text)
+        erase_index = paper.text.rfind(erased_text)
+        paper.text = (paper.text[:erase_index] 
+                      + " "*erase_length 
+                      + paper.text[erase_index+erase_length:])
+
+
     def write(self, new_text, paper):
         for character in new_text:
             self._write_character(character, paper)

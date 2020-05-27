@@ -95,8 +95,11 @@ class TestPencil(unittest.TestCase):
         self.pencil.sharpen()
         self.assertEqual(self.pencil.point_durability, expected_durability)
 
-        
-
+    def test_when_pencil_erases_last_occurence_on_paper_is_replaced_with_spaces(self):
+        self.pencil.write("lovely day for a bike ride today", self.paper)
+        self.pencil.erase("day", self.paper)
+        expected_text = "lovely day for a bike ride to   "
+        self.assertEqual(self.paper.text, expected_text)
 
 if __name__ == "__main__":
     unittest.main()
