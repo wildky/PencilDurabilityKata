@@ -148,6 +148,12 @@ class TestPencil(unittest.TestCase):
         self.assertEqual(self.pencil.eraser_durability, 
                          expected_eraser_durability)
 
+    def test_when_eraser_durability_reaches_zero_during_erase_session_nothing_else_is_erased(self):
+        self.pencil.eraser_durability = 6
+        self.pencil.write("I am ready for a quarantine snacky snack", self.paper)
+        self.pencil.erase("ky snack", self.paper)
+        self.assertEqual(self.paper.text, "I am ready for a quarantine snack       ")
+
 if __name__ == "__main__":
     unittest.main()
         

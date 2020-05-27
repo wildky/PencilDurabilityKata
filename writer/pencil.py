@@ -75,14 +75,15 @@ class Pencil:
 
         try:
             first_character_index = paper.text.rindex(erased_text)
-            final_character_index = first_character_index + len(erased_text) - 1
-            current_character_index = final_character_index
-            for character in erased_text:
-                if self.eraser_durability > 0:
-                    self._erase_character(character, current_character_index, paper)
-                    current_character_index -= 1
         except ValueError:
-            pass
+            return
+        final_character_index = first_character_index + len(erased_text) - 1
+        current_character_index = final_character_index
+        for character in reversed(erased_text):
+            if self.eraser_durability == 0:
+                break
+            self._erase_character(character, current_character_index, paper)
+            current_character_index -= 1
 
     def _erase_character(self, character, index, paper):
         """
