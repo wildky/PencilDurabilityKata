@@ -10,14 +10,3 @@ class Paper:
 
     def __init__(self):
         self.text = ""
-
-    def write(self, new_text):
-        """
-        Appends text to end of text existing on the paper.
-
-        Parameters
-        ----------
-        new_text : str
-            The new text that is to be added.
-        """
-        self.text += new_text
