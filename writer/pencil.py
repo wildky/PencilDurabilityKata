@@ -207,9 +207,15 @@ class Pencil:
             return 0
     
     def edit(self, new_text, index, paper):
+        
         for character in new_text:
+            existing_character = paper.text[index]
+            if existing_character is ' ':
+                inserted_character = character
+            else:
+                inserted_character = '@'
             paper.text = (paper.text[:index] 
-                          + character
-                          + paper.text[index + 1:])
+                        + inserted_character
+                        + paper.text[index + 1:])
             self.eraser_durability -= self.ERASER_DEGRADATION_VALUE
             index += 1

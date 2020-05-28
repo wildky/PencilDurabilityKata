@@ -162,6 +162,13 @@ class TestPencil(unittest.TestCase):
         self.pencil.edit("happy", 14, self.paper)
         self.assertEqual(self.paper.text, edited_text)
 
+    def test_when_edit_at_specified_location_of_non_whitespace_collision_character_is_replaced(self):
+        original_text = "butterflies"
+        edited_text = "@@@@@@flies"
+        self.pencil.write(original_text, self.paper)
+        self.pencil.edit("pupper", 0, self.paper)
+        self.assertEqual(self.paper.text, edited_text)    
+
 if __name__ == "__main__":
     unittest.main()
         
