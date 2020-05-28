@@ -248,11 +248,14 @@ class Pencil:
             inserted_character = character
         else:
             inserted_character = self.COLLISION_CHARACTER
-        paper.text = (paper.text[:index] 
-                    + inserted_character
-                    + paper.text[index + 1:])
-        self.eraser_durability -= self.ERASER_DEGRADATION_VALUE
 
+        durability_reduction = self._calculate_durability_reduction(character)
+        if self.point_durability - durability_reduction >= 0:
+            paper.text = (paper.text[:index] 
+                        + inserted_character
+                        + paper.text[index + 1:])
+            self.point_durability -= durability_reduction
+            
     def _editable(self, character):
         """
         Determines if a provided character can be edited.

@@ -167,7 +167,15 @@ class TestPencil(unittest.TestCase):
         edited_text = "@@@@@@flies"
         self.pencil.write(original_text, self.paper)
         self.pencil.edit("pupper", 0, self.paper)
-        self.assertEqual(self.paper.text, edited_text)    
+        self.assertEqual(self.paper.text, edited_text)
+    
+    def test_when_edit_that_point_durability_decreases_accordingly(self):
+        original_text = "Butterflies are good"
+        self.pencil.write(original_text, self.paper)
+        self.pencil.erase("flies are good", self.paper)
+        self.pencil.edit("Balls are fine", 6, self.paper)
+        expected_durability = self.max_point_durability - 13 - 19
+        self.assertEqual(self.pencil.point_durability, expected_durability)
 
 if __name__ == "__main__":
     unittest.main()
