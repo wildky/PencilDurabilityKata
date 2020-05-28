@@ -7,9 +7,12 @@ This is a solution to the [Pencil Durability Kata](https://github.com/PillarTech
 ## Installation
 Writer does not have any requirements or external dependencies. Writer can run on Python 2 or 3. 
 
-To use writer in your own project, download or clone the repository and import the `writer` module found in the repository's root directory to your code. See example usage below (in this example, the `writer` module is in the same directory as where the pyhton code is being executed). 
+To use writer in your own project, download or clone the repository and import the `writer` module found in the repository's root directory to your code.
 
-### Example Usage
+
+## Quick Start
+
+In this example, the `writer` module is in the same directory as where the pyhton code is being executed. 
 
 ```python
 from writer.paper import Paper
@@ -28,7 +31,7 @@ pencil.edit("happy", 14, paper)
 paper.text # returns "My plants are happy and I am not sure why"
 ```
 
-### Testing
+## Testing
 
 All tests are contained in the `test_writer.py` file. Use the included Makefile task to run unit tests:
 
