@@ -154,7 +154,7 @@ class TestPencil(unittest.TestCase):
         self.pencil.erase("ky snack", self.paper)
         self.assertEqual(self.paper.text, "I am ready for a quarantine snack       ")
 
-    def test_when_edit_at_specified_location_of_whitespace_text_is_replaced(self):
+    def test_when_edit_whitespace__then_new_text_is_replaced(self):
         original_text = "My plants are dying and I am not sure why"
         edited_text = "My plants are happy and I am not sure why"
         self.pencil.write(original_text, self.paper)
@@ -162,7 +162,7 @@ class TestPencil(unittest.TestCase):
         self.pencil.edit("happy", 14, self.paper)
         self.assertEqual(self.paper.text, edited_text)
 
-    def test_when_edit_at_specified_location_of_non_whitespace_collision_character_is_replaced(self):
+    def test_when_edit_non_whitespace_then_collision_character_is_replaced(self):
         original_text = "butterflies"
         edited_text = "@@@@@@flies"
         self.pencil.write(original_text, self.paper)
