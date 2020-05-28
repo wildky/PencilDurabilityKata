@@ -4,15 +4,24 @@ Writer is a Python library that emulates writing with a pencil and paper.
 
 This is a solution to the [Pencil Durability Kata](https://github.com/PillarTechnology/kata-pencil-durability) described by Pillar Technology. 
 
-## Installation
+## Dependencies
 Writer does not have any requirements or external dependencies. Writer can run on Python 2 or 3. 
 
-To use writer in your own project, download or clone the repository and import the `writer` module found in the repository's root directory to your code.
+## Installation
+Clone the repository on your local machine:
 
+```bash
+git clone https://github.com/wildky/PencilDurabilityKata.git
+```
+
+To use writer in your own python project, import the `writer` module found in the repository's root directory to your code:
+
+```python
+import writer
+```
 
 ## Quick Start
-
-In this example, the `writer` module is in the same directory as where the pyhton code is being executed. 
+In this example, the `writer` module is in the same directory where the python code is being executed. 
 
 ```python
 from writer.paper import Paper
@@ -33,7 +42,9 @@ paper.text # returns "My plants are happy and I am not sure why"
 
 ## Testing
 
-All tests are contained in the `test_writer.py` file. Use the included Makefile task to run unit tests:
+All tests are contained in the `test_writer.py` file. 
+
+Use the included Makefile task to run unit tests by running this command from the repository's root directory:
 
 ```bash
 make test
