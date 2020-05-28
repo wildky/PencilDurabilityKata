@@ -34,6 +34,8 @@ class Pencil:
     LENGTH_DEGRADATION_VALUE = 1
     ERASER_DEGRADATION_VALUE = 1
     NON_ERASABLE_CHARACTERS = [" "]
+    EDITABLE_CHARACTERS = [" "]
+    COLLISION_CHARACTER = "@"
 
     def __init__(self, max_point_durability, length, eraser_durability):
         self.max_point_durability = max_point_durability
@@ -209,13 +211,16 @@ class Pencil:
     def edit(self, new_text, index, paper):
         
         for character in new_text:
-            existing_character = paper.text[index]
-            if existing_character is ' ':
+            character_to_edit = paper.text[index]
+            if self._editable(character_to_edit):
                 inserted_character = character
             else:
-                inserted_character = '@'
+                inserted_character = self.COLLISION_CHARACTER
             paper.text = (paper.text[:index] 
                         + inserted_character
                         + paper.text[index + 1:])
             self.eraser_durability -= self.ERASER_DEGRADATION_VALUE
             index += 1
+    
+    def _editable(self, character):
+        return True if character in self.EDITABLE_CHARACTERS else False
