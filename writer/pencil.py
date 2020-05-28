@@ -277,6 +277,19 @@ class Pencil:
         return True if character in self.EDITABLE_CHARACTERS else False
     
     def _insert_character(self, character, index, paper):
+        """
+        Low level function for inserting character at specified index of paper text.
+        Used by _write_character and _edit_character functions.
+
+        Parameters
+        ----------
+        character : str with length of 1
+            the new character to be edited in
+        index : int
+            the index of the character to be replaced on the paper text
+        paper : Paper
+        """
+
         paper.text = (paper.text[:index] 
                     + character
                     + paper.text[index + 1:])
