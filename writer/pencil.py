@@ -36,6 +36,8 @@ class Pencil:
     NON_ERASABLE_CHARACTERS = [" "]
     EDITABLE_CHARACTERS = [" "]
     COLLISION_CHARACTER = "@"
+    DULL_POINT_CHARACTER = " "
+    ERASED_CHARACTER = " "
 
     def __init__(self, max_point_durability, length, eraser_durability):
         self.max_point_durability = max_point_durability
@@ -106,9 +108,7 @@ class Pencil:
         """
 
         if self._erasable(character):
-            paper.text = (paper.text[:index] 
-                          + " "
-                          + paper.text[index + 1:])
+            self._insert_character(self.ERASED_CHARACTER, index, paper)
             self.eraser_durability -= self.ERASER_DEGRADATION_VALUE
     
     def _erasable(self, character):
@@ -176,10 +176,10 @@ class Pencil:
     
         durability_reduction = self._calculate_durability_reduction(character)
         if self.point_durability - durability_reduction >= 0:
-            paper.write(character)
+            self._insert_character(character, len(paper.text), paper)
             self.point_durability -= durability_reduction
         else:
-            paper.write(" ")
+            self._insert_character(self.DULL_POINT_CHARACTER, len(paper.text), paper)
 
     def _calculate_durability_reduction(self, character):
         """
@@ -251,11 +251,9 @@ class Pencil:
 
         durability_reduction = self._calculate_durability_reduction(character)
         if self.point_durability - durability_reduction >= 0:
-            paper.text = (paper.text[:index] 
-                        + inserted_character
-                        + paper.text[index + 1:])
+            self._insert_character(inserted_character, index, paper)
             self.point_durability -= durability_reduction
-            
+
     def _editable(self, character):
         """
         Determines if a provided character can be edited.
@@ -277,3 +275,8 @@ class Pencil:
         """
 
         return True if character in self.EDITABLE_CHARACTERS else False
+    
+    def _insert_character(self, character, index, paper):
+        paper.text = (paper.text[:index] 
+                    + character
+                    + paper.text[index + 1:])
