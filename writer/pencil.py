@@ -209,11 +209,40 @@ class Pencil:
             return 0
     
     def edit(self, new_text, index, paper):
+        """
+        Edits existing text on a paper.
+
+        Will attempt to add `new_text` to the paper.text string starting at 
+        the specified `index` (such that the index of the first character in the
+        paper text is 0. If the existing text is a non-whitespace character, 
+        then a collision character (@) will be written instead of desired new 
+        character.   
+
+        Parameters
+        ----------
+        new_text : str
+        index : int
+        paper : Paper
+
+        """
         for character in new_text:
             self._edit_character(character, index, paper)
             index += 1
     
     def _edit_character(self, character, index, paper):
+        """
+        Edits a single `character` at specifed `index` in the `paper` text.
+        This method should not be used externally, use `Pencil.edit()`
+        instead.
+
+        Parameters
+        ----------
+        character : str with length of 1
+            the new character to be edited in
+        index : int
+            the index of the character to be replaced on the paper text
+        paper : Paper
+        """
         character_to_edit = paper.text[index]
         if self._editable(character_to_edit):
             inserted_character = character
@@ -225,4 +254,23 @@ class Pencil:
         self.eraser_durability -= self.ERASER_DEGRADATION_VALUE
 
     def _editable(self, character):
+        """
+        Determines if a provided character can be edited.
+        Editable characters are included in the 
+        Pencil.EDITABLE_CHARACTERS list
+        
+        Parameters
+        ----------
+        character : str with length of 1
+
+        Returns
+        -------
+        boolean
+            Whether or not the `character` can be edited.
+
+        See Also
+        --------
+        Pencil.EDITABLE_CHARACTERS : list of editable characters
+        """
+
         return True if character in self.EDITABLE_CHARACTERS else False
