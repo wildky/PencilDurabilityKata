@@ -209,18 +209,20 @@ class Pencil:
             return 0
     
     def edit(self, new_text, index, paper):
-        
         for character in new_text:
-            character_to_edit = paper.text[index]
-            if self._editable(character_to_edit):
-                inserted_character = character
-            else:
-                inserted_character = self.COLLISION_CHARACTER
-            paper.text = (paper.text[:index] 
-                        + inserted_character
-                        + paper.text[index + 1:])
-            self.eraser_durability -= self.ERASER_DEGRADATION_VALUE
+            self._edit_character(character, index, paper)
             index += 1
     
+    def _edit_character(self, character, index, paper):
+        character_to_edit = paper.text[index]
+        if self._editable(character_to_edit):
+            inserted_character = character
+        else:
+            inserted_character = self.COLLISION_CHARACTER
+        paper.text = (paper.text[:index] 
+                    + inserted_character
+                    + paper.text[index + 1:])
+        self.eraser_durability -= self.ERASER_DEGRADATION_VALUE
+
     def _editable(self, character):
         return True if character in self.EDITABLE_CHARACTERS else False
