@@ -29,8 +29,8 @@ class Pencil:
         The current eraser durability of the pencil.  
     """
 
-    POINT_DEGADATION_VALUE_UPPER = 2
-    POINT_DEGADATION_VALUE_LOWER = 1
+    POINT_DEGRADATION_VALUE_UPPER = 2
+    POINT_DEGRADATION_VALUE_LOWER = 1
     LENGTH_DEGRADATION_VALUE = 1
     ERASER_DEGRADATION_VALUE = 1
     NON_ERASABLE_CHARACTERS = [" "]
@@ -204,9 +204,9 @@ class Pencil:
         """
 
         if character.isupper():
-            return self.POINT_DEGADATION_VALUE_UPPER
+            return self.POINT_DEGRADATION_VALUE_UPPER
         elif character.islower():
-            return self.POINT_DEGADATION_VALUE_LOWER
+            return self.POINT_DEGRADATION_VALUE_LOWER
         else:
             return 0
     
