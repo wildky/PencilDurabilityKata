@@ -182,33 +182,6 @@ class Pencil:
             self._insert_character(self.DULL_POINT_CHARACTER, 
                                    len(paper.text), 
                                    paper)
-
-    def calculate_point_durability_cost(self, character):
-        """
-        Determines how much writing a character will reduce point durability.
-
-        Upper case characters reduce `point_durability` by value equal to 
-        `Pencil.POINT_DEGRADATION_VALUE_UPPER` and lower case characters 
-        reduce `point_durability` by value equal to 
-        `Pencil.POINT_DEGRADATION_VALUE_LOWER`. All other characters do not 
-        reduce point durability of the pencil. 
-
-        Parameters
-        ----------
-        character : str with length of 1
-            the character to be written
-
-        Returns
-        -------
-        int : point durability to be reduced for writing the character
-        """
-
-        if character.isupper():
-            return self.POINT_DEGRADATION_VALUE_UPPER
-        elif character.islower():
-            return self.POINT_DEGRADATION_VALUE_LOWER
-        else:
-            return 0
     
     def edit(self, new_text, index, paper):
         """
@@ -277,7 +250,34 @@ class Pencil:
         """
 
         return True if character in self.EDITABLE_CHARACTERS else False
-    
+
+    def calculate_point_durability_cost(self, character):
+        """
+        Determines how much writing a character will reduce point durability.
+
+        Upper case characters reduce `point_durability` by value equal to 
+        `Pencil.POINT_DEGRADATION_VALUE_UPPER` and lower case characters 
+        reduce `point_durability` by value equal to 
+        `Pencil.POINT_DEGRADATION_VALUE_LOWER`. All other characters do not 
+        reduce point durability of the pencil. 
+
+        Parameters
+        ----------
+        character : str with length of 1
+            the character to be written
+
+        Returns
+        -------
+        int : point durability to be reduced for writing the character
+        """
+
+        if character.isupper():
+            return self.POINT_DEGRADATION_VALUE_UPPER
+        elif character.islower():
+            return self.POINT_DEGRADATION_VALUE_LOWER
+        else:
+            return 0
+            
     def _insert_character(self, character, index, paper):
         """
         Low level function for inserting character at specified index of paper text.
