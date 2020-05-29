@@ -1,6 +1,5 @@
 class Pencil:
-    """
-    A writing utensil that can be used to add and edit text on a paper.
+    """A writing utensil that can be used to add and edit text on a paper.
 
     Parameters
     ----------
@@ -46,8 +45,7 @@ class Pencil:
         self.eraser_durability = eraser_durability
     
     def sharpen(self):
-        """ 
-        Improves point durability of a dull pencil tip.
+        """ Improves point durability of a dull pencil tip.
         Will restore `point_durability` to `max_point_durability`
         and also reduce the pencil `length`. Once a pencil's `length`
         reaches zero, it can no longer be sharpened.
@@ -58,13 +56,13 @@ class Pencil:
             self.length -= 1
 
     def erase(self, erased_text, paper):
-        """
-        Removes text from a paper.
-        
+        """Removes text from a paper.
         Will remove the most recent occurence of `erased_text` found in the
         paper.text string. If `erased_text` is not found, no action will be 
-        taken. Will reduce the pencil's `eraser_durability` accordingly. 
-        When `eraser_durability` reaches zero, text will no longer be deleted. 
+        taken. Will erase characters one by one starting with last character
+        written, and reduce the pencil's `eraser_durability` accordingly for
+        each character. When `eraser_durability` reaches zero, text will no 
+        longer be deleted. 
 
         Parameters
         ----------
@@ -90,8 +88,7 @@ class Pencil:
             current_character_index -= 1
 
     def _erase_character(self, character, index, paper):
-        """
-        Removes a single character on a paper provided its location.
+        """Removes a single character on a paper provided its location.
         This method should not be used externally, use `Pencil.erase()`
         instead.
 
@@ -112,8 +109,7 @@ class Pencil:
             self.eraser_durability -= self.ERASER_DEGRADATION_VALUE
     
     def _erasable(self, character):
-        """
-        Determines if a provided character can be erased.
+        """Determines if a provided character can be erased.
         All characters are erasable except for those included in the 
         Pencil.NON_ERASABLE_CHARACTERS list
         
@@ -134,9 +130,7 @@ class Pencil:
         return False if character in self.NON_ERASABLE_CHARACTERS else True
 
     def write(self, new_text, paper):
-        """
-        Appends text to the end of a paper.
-
+        """Appends text to the end of a paper.
         Will append `new_text` to the end of paper.text string. Will reduce 
         the pencil's `point_durability` accordingly. When `point_durability`
         reaches zero, new written text will be replaced with white space
@@ -158,8 +152,7 @@ class Pencil:
             self._write_character(character, paper)
 
     def _write_character(self, character, paper):
-        """
-        Appends a single character to paper text.
+        """Appends a single character to paper text.
         This method should not be used externally, use `Pencil.write()`
         instead.
 
@@ -184,14 +177,12 @@ class Pencil:
                                    paper)
     
     def edit(self, new_text, index, paper):
-        """
-        Edits existing text on a paper.
-
+        """Edits existing text on a paper.
         Will attempt to add `new_text` to the paper.text string starting at 
-        the specified `index` (such that the index of the first character in the
-        paper text is 0. If the existing text is a non-whitespace character, 
-        then a collision character (@) will be written instead of desired new 
-        character.   
+        the specified `index` (such that the index of the first character in
+        the paper text is 0. If the existing text is a non-whitespace 
+        character, then a collision character (@) will be written instead of 
+        desired new character.   
 
         Parameters
         ----------
@@ -205,8 +196,7 @@ class Pencil:
             index += 1
     
     def _edit_character(self, character, index, paper):
-        """
-        Edits a single `character` at specifed `index` in the `paper` text.
+        """Edits a single `character` at specifed `index` in the `paper` text.
         This method should not be used externally, use `Pencil.edit()`
         instead.
 
@@ -230,8 +220,7 @@ class Pencil:
             self.point_durability -= durability_reduction
 
     def _editable(self, character):
-        """
-        Determines if a provided character can be edited.
+        """Determines if a provided character can be edited.
         Editable characters are included in the 
         Pencil.EDITABLE_CHARACTERS list
         
@@ -252,9 +241,8 @@ class Pencil:
         return True if character in self.EDITABLE_CHARACTERS else False
 
     def calculate_point_durability_cost(self, character):
-        """
-        Determines how much writing a character will reduce point durability.
-
+        """Determines how much writing a character will reduce point
+        durability.
         Upper case characters reduce `point_durability` by value equal to 
         `Pencil.POINT_DEGRADATION_VALUE_UPPER` and lower case characters 
         reduce `point_durability` by value equal to 
@@ -277,11 +265,10 @@ class Pencil:
             return self.POINT_DEGRADATION_VALUE_LOWER
         else:
             return 0
-            
+
     def _insert_character(self, character, index, paper):
-        """
-        Low level function for inserting character at specified index of paper text.
-        Used by _write_character and _edit_character functions.
+        """Low level function for inserting character at specified index of 
+        paper text. Used by _write_character and _edit_character functions.
 
         Parameters
         ----------
