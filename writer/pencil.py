@@ -174,14 +174,16 @@ class Pencil:
         paper : Paper
         """
     
-        durability_reduction = self._calculate_durability_reduction(character)
+        durability_reduction = self.calculate_point_durability_cost(character)
         if self.point_durability - durability_reduction >= 0:
             self._insert_character(character, len(paper.text), paper)
             self.point_durability -= durability_reduction
         else:
-            self._insert_character(self.DULL_POINT_CHARACTER, len(paper.text), paper)
+            self._insert_character(self.DULL_POINT_CHARACTER, 
+                                   len(paper.text), 
+                                   paper)
 
-    def _calculate_durability_reduction(self, character):
+    def calculate_point_durability_cost(self, character):
         """
         Determines how much writing a character will reduce point durability.
 
@@ -249,7 +251,7 @@ class Pencil:
         else:
             inserted_character = self.COLLISION_CHARACTER
 
-        durability_reduction = self._calculate_durability_reduction(character)
+        durability_reduction = self.calculate_point_durability_cost(character)
         if self.point_durability - durability_reduction >= 0:
             self._insert_character(inserted_character, index, paper)
             self.point_durability -= durability_reduction
